@@ -2,12 +2,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ReviewTable from "./ReviewTable";
 import UserSubmission from "./ReviewSubmission";
-import CampsiteMap from "./CampsiteMap";
+
 import video from "./background.mp4";
+import React, { useState } from "react";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
+
 export default function App() {
+  const [address, setAddress] = useState("");
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value);
+    const ll = await getLatLng(results[0]);
+    console.log(results);
+    setAddress(value);
+    setCoordinates(ll);
+  };
   return (
     <div className="App">
-      <video src={video} autoplay muted></video>
+      <video src={video} autoPlay muted></video>
 
       <div className="container">
         <div className="card main">
@@ -30,9 +45,57 @@ export default function App() {
               <UserSubmission />
             </div>
             <div className="col-sm-4">
-              <CampsiteMap />
+             
             </div>
           </div>
+        </div>
+        <div>
+          <p>lat: {coordinates.lat}</p>
+          <p>long: {coordinates.lng}</p>
+          <p>Address: {address}</p>
+          <PlacesAutocomplete
+            value={address}
+            onChange={setAddress}
+            onSelect={handleSelect}
+          >
+            {({
+              getInputProps,
+              suggestions,
+              getSuggestionItemProps,
+              loading,
+            }) => (
+              <div key={suggestions.description}>
+                <input
+                  {...getInputProps({
+                    placeholder: "Search Places ...",
+                    className: "location-search-input",
+                  })}
+                />
+                <div className="autocomplete-dropdown-container">
+                  {loading && <div>Loading...</div>}
+                  {suggestions.map((suggestion) => {
+                    const className = suggestion.active
+                      ? "suggestion-item--active"
+                      : "suggestion-item";
+                    // inline style for demonstration purpose
+                    const style = suggestion.active
+                      ? { backgroundColor: "#fafafa", cursor: "pointer" }
+                      : { backgroundColor: "#ffffff", cursor: "pointer" };
+                    return (
+                      <div
+                        {...getSuggestionItemProps(suggestion, {
+                          className,
+                          style,
+                        })}
+                      >
+                        <span>{suggestion.description}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </PlacesAutocomplete>
         </div>
         <div className="card reviewTable">
           <ReviewTable />
