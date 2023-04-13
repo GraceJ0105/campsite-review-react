@@ -1,5 +1,5 @@
 .container {
-  margin-top: 25px;  
+  margin-top: 25px;
 }
 
 p {
@@ -19,21 +19,36 @@ video {
 }
 
 footer {
-    text-align: center;
-    color: whitesmoke;
-    font-weight: 800;
+  text-align: center;
+  color: whitesmoke;
+  font-weight: 800;
 }
 
-.reviewTable, .main {
-    margin-top: 20px;
-    padding: 10px;
+.reviewTable,
+.main {
+  margin-top: 20px;
+  padding: 10px;
 }
 
+
+
+@media (min-width: 1400px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1400px;
+  }
+}
 
 @media (max-width: 750px) {
-   video { display: none; }
-    body {
-      background: url("campingimage.jpg") no-repeat;
-      background-size: cover;
-    }
+  video {
+    display: none;
+  }
+  body {
+    background: url("campingimage.jpg") no-repeat;
+    background-size: cover;
+  }
 }

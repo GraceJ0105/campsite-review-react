@@ -4,22 +4,11 @@ import ReviewTable from "./ReviewTable";
 import UserSubmission from "./ReviewSubmission";
 
 import video from "./background.mp4";
-import React, { useState } from "react";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-places-autocomplete";
+import React from "react";
+
 
 export default function App() {
-  const [address, setAddress] = useState("");
-  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
-  const handleSelect = async (value) => {
-    const results = await geocodeByAddress(value);
-    const ll = await getLatLng(results[0]);
-    console.log(results);
-    setAddress(value);
-    setCoordinates(ll);
-  };
+  
   return (
     <div className="App">
       <video src={video} autoPlay muted></video>
@@ -36,7 +25,7 @@ export default function App() {
             at, so when the time comes, we can share with any pals that follow
             in our foot steps. Then we thought - why stop there? This should be
             out there for anyone to use and contribute. That's where you come in
-            - ontribute your reviews below and use the map to find your next
+            - contribute your reviews below and use the map to find your next
             sweet camp spot.
           </p>
 
@@ -44,59 +33,10 @@ export default function App() {
             <div className="col-sm-8">
               <UserSubmission />
             </div>
-            <div className="col-sm-4">
-             
-            </div>
+            <div className="col-sm-4"></div>
           </div>
         </div>
-        <div>
-          <p>lat: {coordinates.lat}</p>
-          <p>long: {coordinates.lng}</p>
-          <p>Address: {address}</p>
-          <PlacesAutocomplete
-            value={address}
-            onChange={setAddress}
-            onSelect={handleSelect}
-          >
-            {({
-              getInputProps,
-              suggestions,
-              getSuggestionItemProps,
-              loading,
-            }) => (
-              <div key={suggestions.description}>
-                <input
-                  {...getInputProps({
-                    placeholder: "Search Places ...",
-                    className: "location-search-input",
-                  })}
-                />
-                <div className="autocomplete-dropdown-container">
-                  {loading && <div>Loading...</div>}
-                  {suggestions.map((suggestion) => {
-                    const className = suggestion.active
-                      ? "suggestion-item--active"
-                      : "suggestion-item";
-                    // inline style for demonstration purpose
-                    const style = suggestion.active
-                      ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                      : { backgroundColor: "#ffffff", cursor: "pointer" };
-                    return (
-                      <div
-                        {...getSuggestionItemProps(suggestion, {
-                          className,
-                          style,
-                        })}
-                      >
-                        <span>{suggestion.description}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </PlacesAutocomplete>
-        </div>
+        
         <div className="card reviewTable">
           <ReviewTable />
         </div>{" "}
