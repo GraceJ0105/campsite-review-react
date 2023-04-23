@@ -1,14 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import ReviewTable from "./ReviewTable";
+import GoogleAutoComplete from "./GoogleAutoComplete"
+
 import UserSubmission from "./ReviewSubmission";
 
 import video from "./background.mp4";
 import React from "react";
 
-
 export default function App() {
-  
   return (
     <div className="App">
       <video src={video} autoPlay muted></video>
@@ -30,16 +29,14 @@ export default function App() {
           </p>
 
           <div className="row">
-            <div className="col-sm-8">
+            <div>
+              <GoogleAutoComplete />
               <UserSubmission />
             </div>
-            <div className="col-sm-4"></div>
+            
           </div>
         </div>
         
-        <div className="card reviewTable">
-          <ReviewTable />
-        </div>{" "}
         <footer>
           Coded by Grace Johnson, open source on{" "}
           <a

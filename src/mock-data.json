@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "campsiteName": "Wasa Lake",
+    "address": "Wasa Lake Campground",
+    "vibe": "1",
+    "amenities": "2",
+    "location": "3",
+    "comfort": "4",
+    "views": "5"
+  },
+  {
+    "id": 2,
+    "campsiteName": "Lillooet",
+    "address": "Lillooet Lake Campground",
+    "vibe": "1",
+    "amenities": "2",
+    "location": "3",
+    "comfort": "4",
+    "views": "5"
+  },
+  {
+    "id": 3,
+    "campsiteName": "Martha Creek",
+    "address": "Martha Creek Campground",
+    "vibe": "1",
+    "amenities": "2",
+    "location": "3",
+    "comfort": "4",
+    "views": "5"
+  }
+]
