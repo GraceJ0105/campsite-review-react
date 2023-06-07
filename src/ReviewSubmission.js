@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import data from "./mock-data.json";
 import { nanoid } from "nanoid";
 
-export default function UserSubmission() {
+export default function UserSubmission(props) {
   const [reviews, setReviews] = useState(data);
   const [addFormData, setAddFormData] = useState({
     campsiteName: " ",
@@ -28,8 +28,8 @@ export default function UserSubmission() {
     event.preventDefault();
     const newReview = {
       id: nanoid(),
-      campsiteName: addFormData.campsiteName,
-      address: addFormData.address,
+      campsiteName: props.name,
+      address: props.address,
       vibe: addFormData.vibe,
       amenities: addFormData.amenities,
       location: addFormData.location,
@@ -42,51 +42,30 @@ export default function UserSubmission() {
 
   return (
     <div className="app-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Campsite Name</th>
-            <th>Address</th>
-            <th>Vibe</th>
-            <th>Amenities</th>
-            <th>Location</th>
-            <th>Comfort</th>
-            <th>Views</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reviews.map((review) => (
-            <tr>
-              <td>{review.campsiteName}</td>
-              <td>{review.address}</td>
-              <td>{review.vibe}</td>
-              <td>{review.amenities}</td>
-              <td>{review.location}</td>
-              <td>{review.comfort}</td>
-              <td>{review.views}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <h2>Add a Review</h2>
-
       <form onSubmit={handleAddFormSubmit}>
-        <input
-          type="text"
-          name="campsiteName"
-          required="required"
-          placeholder="Enter a name..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="address"
-          required="required"
-          placeholder="Enter an address..."
-          onChange={handleAddFormChange}
-        />
-
+        <div className="row mt-2">
+          <div className="col-5">
+            <input
+              type="text"
+              name="campsiteName"
+              value={props.name}
+              required="required"
+              placeholder="Campsite name"
+              onChange={handleAddFormChange}
+            />
+          </div>
+          <div className="col-7">
+            <input
+              type="text"
+              name="address"
+              value={props.address}
+              required="required"
+              placeholder="Address"
+              onChange={handleAddFormChange}
+            />
+          </div>
+        </div>
+        <label className="mt-2"> Vibe:</label>
         <input
           type="number"
           name="vibe"
@@ -94,7 +73,9 @@ export default function UserSubmission() {
           max={5}
           required="required"
           onChange={handleAddFormChange}
+          className="mt-2"
         />
+        <label className="mx-1"> Amenities:</label>
         <input
           type="number"
           name="amenities"
@@ -103,6 +84,7 @@ export default function UserSubmission() {
           required="required"
           onChange={handleAddFormChange}
         />
+        <label className="mx-1"> Location:</label>
         <input
           type="number"
           name="location"
@@ -110,6 +92,7 @@ export default function UserSubmission() {
           max={5}
           onChange={handleAddFormChange}
         />
+        <label className="mx-1"> Comfort:</label>
         <input
           type="number"
           name="comfort"
@@ -118,7 +101,7 @@ export default function UserSubmission() {
           required="required"
           onChange={handleAddFormChange}
         />
-
+        <label className="mx-1"> Views:</label>
         <input
           type="number"
           name="views"
@@ -127,8 +110,39 @@ export default function UserSubmission() {
           required="required"
           onChange={handleAddFormChange}
         />
-        <button type="submit">Add</button>
+        <br />
+        <button type="submit" className="mt-2">
+          Add
+        </button>
       </form>
+      <div className="row m-3">
+        <table>
+          <thead>
+            <tr>
+              <th>Campsite Name</th>
+              <th>Address</th>
+              <th className="text-center">Vibe</th>
+              <th className="text-center">Amenities</th>
+              <th className="text-center">Location</th>
+              <th className="text-center">Comfort</th>
+              <th className="text-center">Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reviews.map((review) => (
+              <tr>
+                <td>{review.campsiteName}</td>
+                <td>{review.address}</td>
+                <td className="text-center">{review.vibe}</td>
+                <td className="text-center">{review.amenities}</td>
+                <td className="text-center">{review.location}</td>
+                <td className="text-center">{review.comfort}</td>
+                <td className="text-center">{review.views}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

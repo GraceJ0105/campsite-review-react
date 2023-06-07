@@ -1,8 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import GoogleAutoComplete from "./GoogleAutoComplete"
-
-import UserSubmission from "./ReviewSubmission";
+import GoogleAutoComplete from "./GoogleAutoComplete";
 
 import video from "./background.mp4";
 import React from "react";
@@ -28,15 +26,11 @@ export default function App() {
             sweet camp spot.
           </p>
 
-          <div className="row">
-            <div>
-              <GoogleAutoComplete />
-              <UserSubmission />
-            </div>
-            
+          <div>
+            <GoogleAutoComplete />
           </div>
         </div>
-        
+
         <footer>
           Coded by Grace Johnson, open source on{" "}
           <a
