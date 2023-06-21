@@ -4,20 +4,20 @@ import UserSubmission from "./ReviewSubmission";
 import CampsiteMap from "./CampsiteMap";
 import PlacesAutocomplete, {
   geocodeByAddress,
-  //getLatLng,
+  getLatLng,
 } from "react-places-autocomplete";
 
 export default function GoogleAutoComplete() {
   const [campsite, setCampsite] = useState("");
   const [address, setAddress] = useState("");
-  //const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
-    //const ll = await getLatLng(results[0]);
+    const ll = await getLatLng(results[0]);
 
     setAddress(results[0].formatted_address);
     setCampsite(results[0].address_components[0].long_name);
-    //setCoordinates(ll);
+    setCoordinates(ll);
   };
   return (
     <>
